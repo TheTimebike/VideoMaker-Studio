@@ -41,6 +41,7 @@ class Window(Frame):
         self.initButton()
         self.initSpinbox()
         self.initMenubar()
+        self.master.bind("<F5>", self.clearSelections)
 
     def initEntryBoxes(self):
         self.clientIDBox = Entry(self.master, width=70) # All objects are mastered to the main window
@@ -174,7 +175,7 @@ class Window(Frame):
         self.menuDropdownHelp = Menu(self.menuBar)
 
         self.menuDropdownStudio.add_command(label="Start", command=self.packageData)
-        #self.menuDropdownStudio.add_command(label="Clear Boxes", command=self.clearSelections)
+        self.menuDropdownStudio.add_command(label="Clear Boxes", command=self.clearSelections)
         self.menuDropdownStudio.add_command(label="Quit", command=quit)
 
         self.darkThemeBool = BooleanVar()
@@ -306,6 +307,21 @@ class Window(Frame):
         self.thread = threading.Thread(target=self.verifyData)
         self.thread.daemon = True # So the render stops if the user closes the program
         self.thread.start()
+
+    def clearSelections(self, en=None):
+        self.subredditBox.delete(0, 'end')
+        self.requiredSubredditFlair.delete(0, 'end')
+        self.musicNameBox.delete(0, 'end')
+        self.renderNameBox.delete(0, 'end')
+        self.deleteOldFilesBool.set("false")
+        self.giveSubmitterCreditBool.set("true")
+        self.renderFPSBox.delete(0, 'end')
+        self.renderFPSBox.insert(0, "30")
+        self.threadingSpinbox.delete(0, "end")
+        self.threadingSpinbox.insert(0, "1")
+        self.clipDownloadCountBox.delete(0, "end")
+        self.clipDownloadCountBox.insert(0, "10")
+        self.subredditSearchMethodString.set("entirety of time")
 
     def verifyData(self):
         self.reddit = praw.Reddit(client_id=self.dataPackage["redditClientID"], client_secret=self.dataPackage["redditClientSecret"], user_agent='UserAgent')

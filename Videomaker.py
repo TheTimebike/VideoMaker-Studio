@@ -149,7 +149,7 @@ class Window(Frame):
 
     def initSpinbox(self):
         self.threadingSpinbox = Spinbox(self.master, values=(1,2,3,4,5,6,7,8,9), width=1)
-        self.threadingSpinbox.place(x=240, y=330)
+        self.threadingSpinbox.place(x=240, y=330) # Aligned vertically with the fps box and is aligned hoziontally with the 
         self.threadingSpinboxLabel = Label(self.master, text="Number of Threads")
         self.threadingSpinboxLabel.place(x=260, y=330)
 
@@ -169,11 +169,22 @@ class Window(Frame):
         # same session, it would not display progress properly, whenever they click start it'll clear the bars and let them refill
 
         self.dataPackage = {}
-        self.dataPackage["redditClientID"] = self.clientIDBox.get()
-        self.dataPackage["redditClientSecret"] = self.clientSecretBox.get()
-        self.dataPackage["subredditName"] = self.subredditBox.get()
+        # Validation checks on each box, get ready to read a bunch of the same stuff
 
-        # Validation for this data is later
+        if self.clientIDBox.get() == "":
+            self.insertLog("Please Enter a Client ID Token")
+            return
+        self.dataPackage["redditClientID"] = self.clientIDBox.get()
+
+        if self.clientSecretBox.get() == "":
+            self.insertLog("Please Enter a Client Secret Token")
+            return
+        self.dataPackage["redditClientSecret"] = self.clientSecretBox.get()
+
+        if self.subredditBox.get() == "":
+            self.insertLog("Please Enter a Subreddit Name")
+            return
+        self.dataPackage["subredditName"] = self.subredditBox.get()
 
         if self.musicNameBox.get() != "": # Checks to see if the user entered anything
             self.dataPackage["musicBool"] = True # Simple bool so its easy for other parts to see if they requested music.
@@ -186,9 +197,18 @@ class Window(Frame):
             self.dataPackage["musicBool"] = False
             self.dataPackage["musicPath"] = None # Technichally dont need to even set this in this case, but makes it easier for debugging
             # and reading
+
+        if self.renderNameBox.get() == "":
+            self.insertLog("Please Enter a Name for the Outputted File")
+            return
         self.dataPackage["outputRenderName"] = self.renderNameBox.get() # If they didnt type anything, default to rendered.mp4 or time/date?
-        self.dataPackage["deleteOldBool"] = self.deleteOldFilesBool.get()
+
+        self.dataPackage["deleteOldBool"] = self.deleteOldFilesBool.get() #No need to check for validity, theyre true or false
         self.dataPackage["giveCredit"] = self.giveSubmitterCreditBool.get()
+
+        if self.renderFPSBox.get() == "":
+            self.insertLog("Please Enter a Valid FPS")
+            return
         self.dataPackage["framesPerSecond"] = int(self.renderFPSBox.get())
 
         if self.requiredSubredditFlair.get() != "": # Same logic as audio block
@@ -199,7 +219,12 @@ class Window(Frame):
             self.dataPackage["flairName"] = None
 
         self.dataPackage["timeframe"] = self.subredditSearchMethodString.get()
+
+        if self.clipDownloadCountBox.get() == "":
+            self.insertLog("Please Enter a ")
+            return
         self.dataPackage["downloadCount"] = int(self.clipDownloadCountBox.get())
+        
         self.dataPackage["threadCount"] = int(self.threadingSpinbox.get())
 
         print(str(self.dataPackage)) # for debugging

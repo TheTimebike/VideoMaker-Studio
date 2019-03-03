@@ -104,7 +104,7 @@ class Window(Frame):
         self.subredditSearchMethodString.set("entirety of time") # Default
         self.subredditSearchMethod = OptionMenu(self.master, self.subredditSearchMethodString, 
         "entirety of time", # Different entries in the list
-        "the the last year", # Each one determines the subreddit search type
+        "the last year", # Each one determines the subreddit search type
         "the last month", # Might include support for hot, new and rising categories
         "the last week", # Would require a second option menu
         "the last day", 
@@ -224,7 +224,7 @@ class Window(Frame):
             self.insertLog("Please Enter a ")
             return
         self.dataPackage["downloadCount"] = int(self.clipDownloadCountBox.get())
-        
+
         self.dataPackage["threadCount"] = int(self.threadingSpinbox.get())
 
         print(str(self.dataPackage)) # for debugging
@@ -239,8 +239,16 @@ class Window(Frame):
         # 404 HTTP response == not found
         # 401 HTTP response == invalid keys
         # 503 HTTP response == could not connect to reddit
+        self.timeframeToRedditFormatConversionTable = {
+            "entirety of time": "all", 
+            "the last year": "year", 
+            "the last month": "month", 
+            "the last week": "week",
+            "the last day": "day",
+            "the last hour": "hour"
+            } # Long name
         try:
-           self.subreddit = self.reddit.subreddit(self.dataPackage["subredditName"]).top(time_filter='all')
+           self.subreddit = self.reddit.subreddit(self.dataPackage["subredditName"]).top(time_filter=self.timeframeToRedditFormatConversionTable[self.dataPackage["timeframe"]])
            for x in self.subreddit: # Quick one iteration loop to see if the tokens/subreddit name is correct
                # A little sloppy and I'll probably revise this once i get the chance, low priority issue
                break

@@ -8,7 +8,7 @@ from moviepy.video.compositing.concatenate import concatenate_videoclips
 from moviepy.audio.fx import audio_loop
 from tkinter import *
 from tkinter.ttk import Progressbar
-import praw, glob, urllib.request, threading
+import praw, glob, urllib.request, threading, sys, os
 
 # Ive tried to comment and make this as maintainable as possible because maybe someday someone is gonna find this and have no
 # clue whats going on. That person will probably be me.
@@ -167,10 +167,10 @@ class Window(Frame):
 
     def turnOnDarkMode(self, textColour="White", backgroundColour="#5c5b5b"):
         if self.darkThemeBool.get() == False:
-            textColour = "black"
+            textColour = "black" # inverts the colours
             backgroundColour = "#f0f0f0"
 
-        self.master.configure(background=backgroundColour)
+        self.master.configure(background=backgroundColour) # Mass changing the colours of objects
         self.clientIDBoxLabel.configure(background=backgroundColour, foreground=textColour)
         self.clientSecretBoxLabel.configure(background=backgroundColour, foreground=textColour)
         self.subredditBoxLabel.configure(background=backgroundColour, foreground=textColour)
@@ -224,8 +224,9 @@ class Window(Frame):
         if self.musicNameBox.get() != "": # Checks to see if the user entered anything
             self.dataPackage["musicBool"] = True # Simple bool so its easy for other parts to see if they requested music.
             self.dataPackage["musicPath"] = self.musicNameBox.get()
-            #if not exists:
-                #self.logBox.insert(0, "Could not find the music file specified")
+            if not os.path.isfile(self.dataPackage["musicPath"]):
+                self.logBox.insert(0, "Could not find the music file specified")
+                return
                 # Could either return and let the user fix the problem or warn them and continue on without audio
                 # Ooor I could add a messagebox that asks them to confirm? maybe TODO
         else:

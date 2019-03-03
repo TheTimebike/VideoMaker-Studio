@@ -10,6 +10,9 @@ from tkinter import *
 from tkinter.ttk import Progressbar
 import praw, glob, urllib.request, threading
 
+# Ive tried to comment and make this as maintainable as possible because maybe someday someone is gonna find this and have no
+# clue whats going on. That person will probably be me.
+
 class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -25,6 +28,7 @@ class Window(Frame):
         self.initProgressbars()
         self.initListboxes()
         self.initButton()
+        self.initSpinbox()
 
     def initEntryBoxes(self):
         self.clientIDBox = Entry(self.master, width=70) # All objects are mastered to the main window
@@ -143,6 +147,12 @@ class Window(Frame):
         # proportionate with the button
         self.startButton.place(x=750, y=400)
 
+    def initSpinbox(self):
+        self.threadingSpinbox = Spinbox(self.master, values=(1,2,3,4,5,6,7,8,9), width=1)
+        self.threadingSpinbox.place(x=240, y=330)
+        self.threadingSpinboxLabel = Label(self.master, text="Number of Threads")
+        self.threadingSpinboxLabel.place(x=260, y=330)
+
     def insertLog(self, logText):
         self.logBox.insert(END, logText)
 
@@ -201,6 +211,7 @@ class Window(Frame):
         self.reddit = praw.Reddit(client_id=self.dataPackage["redditClientID"], client_secret=self.dataPackage["redditClientSecret"], user_agent='UserAgent')
         # 404 HTTP response == not found
         # 401 HTTP response == invalid keys
+        # 503 HTTP response == could not connect to reddit
         try:
            self.subreddit = self.reddit.subreddit(self.dataPackage["subredditName"]).top(time_filter='all')
            for x in self.subreddit: # Quick one iteration loop to see if the tokens/subreddit name is correct
@@ -208,6 +219,7 @@ class Window(Frame):
                break
         except Exception as ex:
             self.insertLog("Could not find r/" + self.dataPackage["subredditName"])
+            print(ex)
             return
 
         self.insertLog("r/{0} Found".format(self.dataPackage["subredditName"]))
@@ -229,7 +241,7 @@ class Window(Frame):
         # Check for the exitance of ./Downloaded Videos/, create if not found
 
         self.insertLog("Downloading Clips")
-        self.clipCounter, self.clipNumberConversionTable =  = 1, {} # Initializing variables
+        self.clipCounter, self.clipNumberConversionTable = 1, {} # Initializing variables
         for videoUrl, videoCreator in self.videoUrlDict.items():
             self.parsedUrl = "https://giant.gfycat.com/" + str(videoUrl).split("/")[3] + ".mp4" # Converts regular gfycat links to
             # giant versions, which can be downloaded easier with urllib.request
@@ -276,7 +288,7 @@ class Window(Frame):
             # No need to add music, as they didnt want it. Sitch together all of the clips
 
         self.insertLog("Starting Render Process\n This could take a while...") # Let the user know somethings actually happening
-        self.concatenatedVideo.write_videofile(self.dataPackage["outputRenderName"], fps=self.dataPackage["framesPerSecond"])
+        self.concatenatedVideo.write_videofile(self.dataPackage["outputRenderName"], fps=self.dataPackage["framesPerSecond"], logger=None, threads=4)
         # Render the video, name it what the user wanted and set the fps they reqested
         self.insertLog("Video Rendered")
 

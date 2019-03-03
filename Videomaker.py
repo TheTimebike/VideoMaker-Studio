@@ -17,10 +17,18 @@ class Window(Frame):
         self.initWindow()
 
     def initWindow(self):
+        # Main function that spirals off onto activating all of the windows objects.
         self.master.title("VideoMaker Studio")
+        self.initEntryBoxes()
+        self.initCheckboxes()
+        self.initOptionmenu()
+        self.initProgressbars()
+        self.initListboxes()
+        self.initButton()
 
-        self.clientIDBox = Entry(self.master, width=70)
-        self.clientIDBox.place(x=50, y=35)
+    def initEntryBoxes(self):
+        self.clientIDBox = Entry(self.master, width=70) # 
+        self.clientIDBox.place(x=50, y=35) #
         self.clientIDBoxLabel = Label(self.master, text="Reddit Client ID Token")
         self.clientIDBoxLabel.place(x=475, y=34)
 
@@ -44,6 +52,24 @@ class Window(Frame):
         self.renderNameBoxLabel = Label(self.master, text="Name of Outputted Render.")
         self.renderNameBoxLabel.place(x=350, y=204)
 
+        self.renderFPSBox = Entry(self.master, width=15)
+        self.renderFPSBox.insert(0, "30")
+        self.renderFPSBox.place(x=50, y=330)
+        self.renderFPSBoxLabel = Label(self.master, text="FPS of Output Render")
+        self.renderFPSBoxLabel.place(x=75, y=329)
+
+        self.requiredSubredditFlair = Entry(self.master, width=25)
+        self.requiredSubredditFlair.place(x=50, y=365)
+        self.requiredSubredditFlairLabel = Label(self.master, text="Required Subreddit Flair ( Optional )")
+        self.requiredSubredditFlairLabel.place(x=200, y=364)
+
+        self.clipDownloadCountBox = Entry(self.master, width=15)
+        self.clipDownloadCountBox.insert(0, "10")
+        self.clipDownloadCountBox.place(x=50, y=425)
+        self.clipDownloadCountBoxLabel = Label(self.master, text="Number of Videos to Download")
+        self.clipDownloadCountBoxLabel.place(x=75, y=424)
+
+    def initCheckboxes(self):
         self.deleteOldFilesBool = BooleanVar()
         self.deleteOldFilesCheckbox = Checkbutton(self.master, variable=self.deleteOldFilesBool)
         self.deleteOldFilesCheckbox.place(x=50, y=240)
@@ -57,17 +83,7 @@ class Window(Frame):
         self.giveSubmitterCreditLabel = Label(self.master, text="Give Clip Submitters Credit?")
         self.giveSubmitterCreditLabel.place(x=75, y=267)
 
-        self.renderFPSBox = Entry(self.master, width=15)
-        self.renderFPSBox.insert(0, "30")
-        self.renderFPSBox.place(x=50, y=330)
-        self.renderFPSBoxLabel = Label(self.master, text="FPS of Output Render")
-        self.renderFPSBoxLabel.place(x=75, y=329)
-
-        self.requiredSubredditFlair = Entry(self.master, width=25)
-        self.requiredSubredditFlair.place(x=50, y=365)
-        self.requiredSubredditFlairLabel = Label(self.master, text="Required Subreddit Flair ( Optional )")
-        self.requiredSubredditFlairLabel.place(x=200, y=364)
-
+    def initOptionmenu(self):
         self.subredditSearchMethodString = StringVar()
         self.subredditSearchMethodString.set("entirety of time")
         self.subredditSearchMethod = OptionMenu(self.master, self.subredditSearchMethodString, "entirety of time", "the the last year", "the last month", "the last week", "the last day", "the last hour")
@@ -76,12 +92,7 @@ class Window(Frame):
         self.subredditSearchLabelBefore = Label(self.master, text="VM will search for posts within the")
         self.subredditSearchLabelBefore.place(x=50, y=395)
 
-        self.clipDownloadCountBox = Entry(self.master, width=15)
-        self.clipDownloadCountBox.insert(0, "10")
-        self.clipDownloadCountBox.place(x=50, y=425)
-        self.clipDownloadCountBoxLabel = Label(self.master, text="Number of Videos to Download")
-        self.clipDownloadCountBoxLabel.place(x=75, y=424)
-
+    def initProgressbars(self):
         self.downloadProgressBar = Progressbar(self.master, orient=HORIZONTAL, length=500, mode="determinate")
         self.downloadProgressBar.place(x=50, y=480)
         self.downloadProgressBarLabel = Label(self.master, text="Downloading")
@@ -92,11 +103,17 @@ class Window(Frame):
         #self.renderProgressBarLabel = Label(self.master, text="Rendering")
         #self.renderProgressBarLabel.place(x=550, y=480)
 
+        # Here we mourn the loss of a life of a dear loved one; Progress bar no.2
+        # Having 2 progress bars was ambitious, but it was not meant to be
+        # Because the only output moviepy gives for rendering is a print
+
+    def initListboxes(self):
         self.logBoxScrollbar = Scrollbar(self.master, orient=VERTICAL)
         self.logBox = Listbox(self.master, width=50, height=22, yscrollcommand=self.logBoxScrollbar.set)  
         self.logBoxScrollbar.config(command=self.logBox.yview)
         self.logBox.place(x=750, y=35)
 
+    def initButton(self):
         self.startButton = Button(self.master, text="Start!", width=42, height=5, command=self.packageData)
         self.startButton.place(x=750, y=400)
 

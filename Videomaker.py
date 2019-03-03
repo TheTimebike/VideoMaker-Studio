@@ -13,6 +13,17 @@ import praw, glob, urllib.request, threading, sys, os
 # Ive tried to comment and make this as maintainable as possible because maybe someday someone is gonna find this and have no
 # clue whats going on. That person will probably be me.
 
+# Spacing Codex:
+    # Objects should be spaced 50 x
+    # Objects should be spaced by 35 y
+    # Block seperator +30 y
+    # Labels for checkboxes are +2 y
+    # Labels for entry boxes are -1 y
+    # Width of token entry boxes are 70
+    # Width of path entry boxes are 50
+    # Width of string entry boxes are 25
+    # Width of number entry boxes are 15
+
 class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
@@ -157,13 +168,29 @@ class Window(Frame):
     def initMenubar(self):
         self.menuBar = Menu(self.master)
         self.master.config(menu=self.menuBar)
-        self.menuDropdownTheme = Menu(self.menuBar)
+        self.menuDropdownStudio = Menu(self.menuBar)
+        self.menuDropdownView = Menu(self.menuBar)
+        self.menuDropdownDebug = Menu(self.menuBar)
+        self.menuDropdownHelp = Menu(self.menuBar)
+
+        self.menuDropdownStudio.add_command(label="Start", command=self.packageData)
 
         self.darkThemeBool = BooleanVar()
         self.darkThemeBool.set("false")
-        self.menuDropdownTheme.add_checkbutton(label="Enable Dark Mode", onvalue=True, offvalue=False, command=self.turnOnDarkMode, variable=self.darkThemeBool)
+        self.menuDropdownView.add_checkbutton(label="Toggle Dark Mode", onvalue=True, offvalue=False, command=self.turnOnDarkMode, variable=self.darkThemeBool)
 
-        self.menuBar.add_cascade(label="Appearance", menu=self.menuDropdownTheme)
+        self.loggingModeBool = BooleanVar()
+        self.loggingModeBool.set("false")
+        self.menuDropdownDebug.add_checkbutton(label="Logging Mode", onvalue=True, offvalue=False, variable=self.loggingModeBool)
+
+        self.menuDropdownHelp.add_command(label="Source Code")
+        self.menuDropdownHelp.add_command(label="File Issue")
+        self.menuDropdownHelp.add_command(label="Contact The Creator")
+
+        self.menuBar.add_cascade(label="VideoMaker Studio", menu=self.menuDropdownStudio)
+        self.menuBar.add_cascade(label="View", menu=self.menuDropdownView)
+        self.menuBar.add_cascade(label="Debug", menu=self.menuDropdownDebug)
+        self.menuBar.add_cascade(label="Help", menu=self.menuDropdownHelp)
 
     def turnOnDarkMode(self, textColour="White", backgroundColour="#5c5b5b"):
         if self.darkThemeBool.get() == False:
@@ -227,8 +254,6 @@ class Window(Frame):
             if not os.path.isfile(self.dataPackage["musicPath"]):
                 self.logBox.insert(0, "Could not find the music file specified")
                 return
-                # Could either return and let the user fix the problem or warn them and continue on without audio
-                # Ooor I could add a messagebox that asks them to confirm? maybe TODO
         else:
             self.dataPackage["musicBool"] = False
             self.dataPackage["musicPath"] = None # Technichally dont need to even set this in this case, but makes it easier for debugging
@@ -369,5 +394,5 @@ root = Tk()
 root.geometry("1100x530")
 apps = Window(root)
 #root.iconbitmap(filepath/to/icon)
-# For adding icon when its finished8
+# For adding icon when its finished
 root.mainloop() 

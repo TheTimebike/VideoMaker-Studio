@@ -167,7 +167,7 @@ class Window(Frame):
 
         if self.musicNameBox.get() != "": # Checks to see if the user entered anything
             self.dataPackage["musicBool"] = True # Simple bool so its easy for other parts to see if they requested music.
-            self.dataPackage["musicPath"] = self.musicNameBox.get() s
+            self.dataPackage["musicPath"] = self.musicNameBox.get()
             #if not exists:
                 #self.logBox.insert(0, "Could not find the music file specified")
                 # Could either return and let the user fix the problem or warn them and continue on without audio
@@ -212,15 +212,19 @@ class Window(Frame):
 
         self.insertLog("r/{0} Found".format(self.dataPackage["subredditName"]))
 
-        self.videoUrlDict = {}
+        self.videoUrlDict = {} # Dictionary to store pairs of clips and authors.
+        # post URL is the key and author name is the value
         for subredditPost in self.subreddit:
             if len(self.videoUrlDict) > int(self.dataPackage["downloadCount"]) - 1:
-                break
-            if subredditPost.url.startswith('https://gfycat.com/'):
-                if self.dataPackage["flairBool"]:
-                    if subredditPost.link_flair_text.lower() != self.dataPackage["flairName"].lower():
-                        continue
-                self.videoUrlDict[subredditPost.url] = subredditPost.author.name
+                break # If we have the right amount of videos, quit looping and continue on
+            if subredditPost.url.startswith('https://gfycat.com/'): # Ensure that theyre gfycat clips, might expand to imgur soon
+                # Imgur was planned, but scraping clips from there would need a lot of html parsing, so its put on the backburner
+                # medium priority TODO
+                if self.dataPackage["flairBool"]: # If they requested a specific flair
+                    if subredditPost.link_flair_text.lower() != self.dataPackage["flairName"].lower(): # If the post doesnt have the flair
+                        continue # skip this loop and try the next one
+                self.videoUrlDict[subredditPost.url] = subredditPost.author.name # If you get to here, it either means it has the flair
+                # or they didnt request any. either way, snag it
 
         # Check for the exitance of ./Downloaded Videos/, create if not found
 

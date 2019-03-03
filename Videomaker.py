@@ -29,6 +29,7 @@ class Window(Frame):
         self.initListboxes()
         self.initButton()
         self.initSpinbox()
+        self.initMenubar()
 
     def initEntryBoxes(self):
         self.clientIDBox = Entry(self.master, width=70) # All objects are mastered to the main window
@@ -152,6 +153,40 @@ class Window(Frame):
         self.threadingSpinbox.place(x=240, y=330) # Aligned vertically with the fps box and is aligned hoziontally with the 
         self.threadingSpinboxLabel = Label(self.master, text="Number of Threads")
         self.threadingSpinboxLabel.place(x=260, y=330)
+
+    def initMenubar(self):
+        self.menuBar = Menu(self.master)
+        self.master.config(menu=self.menuBar)
+        self.menuDropdownTheme = Menu(self.menuBar)
+
+        self.darkThemeBool = BooleanVar()
+        self.darkThemeBool.set("false")
+        self.menuDropdownTheme.add_checkbutton(label="Enable Dark Mode", onvalue=True, offvalue=False, command=self.turnOnDarkMode, variable=self.darkThemeBool)
+
+        self.menuBar.add_cascade(label="Appearance", menu=self.menuDropdownTheme)
+
+    def turnOnDarkMode(self, textColour="White", backgroundColour="#5c5b5b"):
+        if self.darkThemeBool.get() == False:
+            textColour = "black"
+            backgroundColour = "#f0f0f0"
+
+        self.master.configure(background=backgroundColour)
+        self.clientIDBoxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.clientSecretBoxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.subredditBoxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.musicNameBoxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.renderNameBoxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.deleteOldFilesLabel.configure(background=backgroundColour, foreground=textColour)
+        self.deleteOldFilesCheckbox.configure(background=backgroundColour, activebackground=backgroundColour, activeforeground=textColour)
+        self.giveSubmitterCreditLabel.configure(background=backgroundColour, foreground=textColour)
+        self.giveSubmitterCreditCheckbox.configure(background=backgroundColour, activebackground=backgroundColour, activeforeground=textColour)
+        self.renderFPSBoxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.threadingSpinboxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.requiredSubredditFlairLabel.configure(background=backgroundColour, foreground=textColour)
+        self.subredditSearchLabelBefore.configure(background=backgroundColour, foreground=textColour)
+        self.subredditSearchMethod.configure(highlightthickness=0, background=backgroundColour, foreground=textColour, activebackground=backgroundColour, activeforeground=textColour)
+        self.clipDownloadCountBoxLabel.configure(background=backgroundColour, foreground=textColour)
+        self.downloadProgressBarLabel.configure(background=backgroundColour, foreground=textColour)
 
     def insertLog(self, logText):
         self.logBox.insert(END, logText)

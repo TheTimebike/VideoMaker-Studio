@@ -174,6 +174,7 @@ class Window(Frame):
         self.menuDropdownHelp = Menu(self.menuBar)
 
         self.menuDropdownStudio.add_command(label="Start", command=self.packageData)
+        #self.menuDropdownStudio.add_command(label="Clear Boxes", command=self.clearSelections)
         self.menuDropdownStudio.add_command(label="Quit", command=quit)
 
         self.darkThemeBool = BooleanVar()
@@ -187,6 +188,7 @@ class Window(Frame):
         self.menuDropdownHelp.add_command(label="Source Code", command=self.redirectToSourceCode)
         self.menuDropdownHelp.add_command(label="File Issue", command=self.redirectToGithubIssue)
         self.menuDropdownHelp.add_command(label="Contact The Creator", command=self.redirectToRedditMessage)
+        self.menuDropdownHelp.add_command(label="How To Find Reddit Tokens?", command=self.redirectToRedditTokens)
 
         self.menuBar.add_cascade(label="VideoMaker Studio", menu=self.menuDropdownStudio)
         self.menuBar.add_cascade(label="View", menu=self.menuDropdownView)
@@ -199,6 +201,8 @@ class Window(Frame):
         webbrowser.open("https://github.com/TheTimebike/VideoMaker-Studio/issues", 2, True)
     def redirectToRedditMessage(self):
         webbrowser.open("https://www.reddit.com/message/compose?to=TheTimebike&subject=Videomaker%20Studio", 2, True)
+    def redirectToRedditTokens(self):
+        webbrowser.open("https://www.reddit.com/prefs/apps/", 2, True)
 
     def turnOnDarkMode(self, textColour="White", backgroundColour="#5c5b5b"):
         if self.darkThemeBool.get() == False:

@@ -8,7 +8,7 @@ from moviepy.video.compositing.concatenate import concatenate_videoclips
 from moviepy.audio.fx import audio_loop
 from tkinter import *
 from tkinter.ttk import Progressbar
-import praw, glob, urllib.request, threading, sys, os
+import praw, glob, urllib.request, threading, sys, os, webbrowser
 
 # Ive tried to comment and make this as maintainable as possible because maybe someday someone is gonna find this and have no
 # clue whats going on. That person will probably be me.
@@ -174,6 +174,7 @@ class Window(Frame):
         self.menuDropdownHelp = Menu(self.menuBar)
 
         self.menuDropdownStudio.add_command(label="Start", command=self.packageData)
+        self.menuDropdownStudio.add_command(label="Quit", command=quit)
 
         self.darkThemeBool = BooleanVar()
         self.darkThemeBool.set("false")
@@ -183,14 +184,21 @@ class Window(Frame):
         self.loggingModeBool.set("false")
         self.menuDropdownDebug.add_checkbutton(label="Logging Mode", onvalue=True, offvalue=False, variable=self.loggingModeBool)
 
-        self.menuDropdownHelp.add_command(label="Source Code")
-        self.menuDropdownHelp.add_command(label="File Issue")
-        self.menuDropdownHelp.add_command(label="Contact The Creator")
+        self.menuDropdownHelp.add_command(label="Source Code", command=self.redirectToSourceCode)
+        self.menuDropdownHelp.add_command(label="File Issue", command=self.redirectToGithubIssue)
+        self.menuDropdownHelp.add_command(label="Contact The Creator", command=self.redirectToRedditMessage)
 
         self.menuBar.add_cascade(label="VideoMaker Studio", menu=self.menuDropdownStudio)
         self.menuBar.add_cascade(label="View", menu=self.menuDropdownView)
         self.menuBar.add_cascade(label="Debug", menu=self.menuDropdownDebug)
         self.menuBar.add_cascade(label="Help", menu=self.menuDropdownHelp)
+
+    def redirectToSourceCode(self):
+        webbrowser.open("https://github.com/TheTimebike/VideoMaker-Studio", 2, True)
+    def redirectToGithubIssue(self):
+        webbrowser.open("https://github.com/TheTimebike/VideoMaker-Studio/issues", 2, True)
+    def redirectToRedditMessage(self):
+        webbrowser.open("https://www.reddit.com/message/compose?to=TheTimebike&subject=Videomaker%20Studio", 2, True)
 
     def turnOnDarkMode(self, textColour="White", backgroundColour="#5c5b5b"):
         if self.darkThemeBool.get() == False:

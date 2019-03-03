@@ -237,24 +237,29 @@ class Window(Frame):
                 self.clipList.append(self.editedVideoClip)
                 # Puts the finished clip into a list for stitching
             else:
-                self.clipList.append(CompositeVideoClip([self.videoClip]))
-        self.insertLog("All Files Loaded Into Memory")
-        self.insertLog("Starting Render Process")
+                self.clipList.append(self.videoClip)
+                # If it doesnt need any editing, just put it into the cliplist
 
-        self.finalDuration = concatenate_videoclips(self.clipList, method='compose').duration
-        if self.dataPackage["musicBool"]:
-            concatenate_videoclips(self.clipList, method='compose').set_audio(afx.audio_loop(AudioFileClip(self.dataPackage["musicPath"]), duration=self.finalDuration)).write_videofile(self.dataPackage["outputRenderName"], fps=self.dataPackage["framesPerSecond"])      
+        self.insertLog("All Files Loaded Into Memory")
+
+        self.finalDuration = concatenate_videoclips(self.clipList, method='compose').duration # Work out the final duration of the output render
+        if self.dataPackage["musicBool"]: # If the user requested music
+            self.audioLoop = afx.audio_loop(AudioFileClip(self.dataPackage["musicPath"]), duration=self.finalDuration)
+            # Create an audio loop for the duration of the final video
+            self.concatenatedVideo = concatenate_videoclips(self.clipList, method='compose').set_audio(self.audioLoop)
+            # Stitch together all of the clips and add the music 
         else:
-            concatenate_videoclips(self.clipList, method='compose').write_videofile(self.dataPackage["outputRenderName"], fps=self.dataPackage["framesPerSecond"])    
+            self.concatenatedVideo = concatenate_videoclips(self.clipList, method='compose')
+            # No need to add music, as they didnt want it. Sitch together all of the clips
+
+        self.insertLog("Starting Render Process\n This could take a while...") # Let the user know somethings actually happening
+        self.concatenatedVideo.write_videofile(self.dataPackage["outputRenderName"], fps=self.dataPackage["framesPerSecond"])
+        # Render the video, name it what the user wanted and set the fps they reqested
         self.insertLog("Video Rendered")
 
 root = Tk()
-#root.state("zoomed")
-#def on_closing():
-#    quit()
-
-#root.protocol("WM_DELETE_WINDOW", on_closing)
 root.geometry("1100x530")
 apps = Window(root)
 #root.iconbitmap(filepath/to/icon)
+# For adding icon when its finished
 root.mainloop() 

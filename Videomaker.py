@@ -147,36 +147,54 @@ class Window(Frame):
         self.logBox.insert(END, logText)
 
     def packageData(self):
+
+        # This function directly spins off from the button press, so whenever the button is pressed it will collect all of the information
+        # provided by the user and will backage it into a dictionary, not nessesary seeing as this is class based and any function/thread
+        # can access all of the information, but if I wanted to enable debugging, using JSON would be a quick and easy way to dump all of 
+        # the configuration. Hooray for future proofing!
+
         self.downloadProgressBar["value"] = 0
         #self.renderProgressBar["value"] = 0
+        # Set the value of both progress bars to 0, meaning they reset to empty. This fixes an issue where, when doing a second render in the
+        # same session, it would not display progress properly, whenever they click start it'll clear the bars and let them refill
+
         self.dataPackage = {}
         self.dataPackage["redditClientID"] = self.clientIDBox.get()
         self.dataPackage["redditClientSecret"] = self.clientSecretBox.get()
         self.dataPackage["subredditName"] = self.subredditBox.get()
-        if self.musicNameBox.get() != "":
-            self.dataPackage["musicBool"] = True
-            self.dataPackage["musicPath"] = self.musicNameBox.get() # Check to see if it exists
+
+        # Validation for this data is later
+
+        if self.musicNameBox.get() != "": # Checks to see if the user entered anything
+            self.dataPackage["musicBool"] = True # Simple bool so its easy for other parts to see if they requested music.
+            self.dataPackage["musicPath"] = self.musicNameBox.get() s
             #if not exists:
                 #self.logBox.insert(0, "Could not find the music file specified")
-                #return
+                # Could either return and let the user fix the problem or warn them and continue on without audio
+                # Ooor I could add a messagebox that asks them to confirm? maybe TODO
         else:
             self.dataPackage["musicBool"] = False
-            self.dataPackage["musicPath"] = None
-        self.dataPackage["outputRenderName"] = self.renderNameBox.get()
+            self.dataPackage["musicPath"] = None # Technichally dont need to even set this in this case, but makes it easier for debugging
+            # and reading
+        self.dataPackage["outputRenderName"] = self.renderNameBox.get() # If they didnt type anything, default to rendered.mp4 or time/date?
         self.dataPackage["deleteOldBool"] = self.deleteOldFilesBool.get()
         self.dataPackage["giveCredit"] = self.giveSubmitterCreditBool.get()
         self.dataPackage["framesPerSecond"] = int(self.renderFPSBox.get())
-        if self.requiredSubredditFlair.get() != "":
+
+        if self.requiredSubredditFlair.get() != "": # Same logic as audio block
             self.dataPackage["flairBool"] = True
             self.dataPackage["flairName"] = self.requiredSubredditFlair.get()
         else:
             self.dataPackage["flairBool"] = False
             self.dataPackage["flairName"] = None
+
         self.dataPackage["timeframe"] = self.subredditSearchMethodString.get()
         self.dataPackage["downloadCount"] = int(self.clipDownloadCountBox.get())
-        print(str(self.dataPackage))
+        #print(str(self.dataPackage)) # for debugging
+
+        # Start thread for the rest of the verifying and rendering so the main window doesnt freeze
         self.thread = threading.Thread(target=self.verifyData)
-        self.thread.daemon = True
+        self.thread.daemon = True # So the render stops if the user closes the program
         self.thread.start()
 
     def verifyData(self):
@@ -185,7 +203,8 @@ class Window(Frame):
         # 401 HTTP response == invalid keys
         try:
            self.subreddit = self.reddit.subreddit(self.dataPackage["subredditName"]).top(time_filter='all')
-           for x in self.subreddit:
+           for x in self.subreddit: # Quick one iteration loop to see if the tokens/subreddit name is correct
+               # A little sloppy and I'll probably revise this once i get the chance, low priority issue
                break
         except Exception as ex:
             self.insertLog("Could not find r/" + self.dataPackage["subredditName"])
@@ -261,5 +280,5 @@ root = Tk()
 root.geometry("1100x530")
 apps = Window(root)
 #root.iconbitmap(filepath/to/icon)
-# For adding icon when its finished
+# For adding icon when its finished8
 root.mainloop() 

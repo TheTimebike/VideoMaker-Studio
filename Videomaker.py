@@ -200,7 +200,9 @@ class Window(Frame):
 
         self.dataPackage["timeframe"] = self.subredditSearchMethodString.get()
         self.dataPackage["downloadCount"] = int(self.clipDownloadCountBox.get())
-        #print(str(self.dataPackage)) # for debugging
+        self.dataPackage["threadCount"] = int(self.threadingSpinbox.get())
+
+        print(str(self.dataPackage)) # for debugging
 
         # Start thread for the rest of the verifying and rendering so the main window doesnt freeze
         self.thread = threading.Thread(target=self.verifyData)
@@ -288,8 +290,10 @@ class Window(Frame):
             # No need to add music, as they didnt want it. Sitch together all of the clips
 
         self.insertLog("Starting Render Process\n This could take a while...") # Let the user know somethings actually happening
-        self.concatenatedVideo.write_videofile(self.dataPackage["outputRenderName"], fps=self.dataPackage["framesPerSecond"], logger=None, threads=4)
+        self.insertLog("Using {0} threads".format(self.dataPackage["threadCount"]))
+        self.concatenatedVideo.write_videofile(self.dataPackage["outputRenderName"], fps=self.dataPackage["framesPerSecond"], logger=None, threads=self.dataPackage["threadCount"])
         # Render the video, name it what the user wanted and set the fps they reqested
+
         self.insertLog("Video Rendered")
 
 root = Tk()

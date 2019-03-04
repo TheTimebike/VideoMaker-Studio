@@ -5,7 +5,7 @@ from moviepy.video.VideoClip import VideoClip, TextClip
 from moviepy.video.compositing.CompositeVideoClip import CompositeVideoClip
 from moviepy.video.fx.resize import resize
 from moviepy.video.compositing.concatenate import concatenate_videoclips
-from moviepy.audio.fx import audio_loop
+from moviepy.audio.fx.audio_loop import audio_loop
 from tkinter import *
 from tkinter.ttk import Progressbar
 import praw, glob, urllib.request, threading, sys, os, webbrowser
@@ -176,7 +176,7 @@ class Window(Frame):
 
         self.menuDropdownStudio.add_command(label="Start", command=self.packageData)
         self.menuDropdownStudio.add_command(label="Clear Boxes", command=self.clearSelections)
-        self.menuDropdownStudio.add_command(label="Quit", command=quit)
+        self.menuDropdownStudio.add_command(label="Quit", command=self.quitProgram)
 
         self.darkThemeBool = BooleanVar()
         self.darkThemeBool.set("false")
@@ -204,6 +204,8 @@ class Window(Frame):
         webbrowser.open("https://www.reddit.com/message/compose?to=TheTimebike&subject=Videomaker%20Studio", 2, True)
     def redirectToRedditTokens(self):
         webbrowser.open("https://www.reddit.com/prefs/apps/", 2, True)
+    def quitProgram(self):
+        quit()
 
     def turnOnDarkMode(self, textColour="White", backgroundColour="#5c5b5b"):
         if self.darkThemeBool.get() == False:
@@ -403,7 +405,7 @@ class Window(Frame):
 
         self.finalDuration = concatenate_videoclips(self.clipList, method='compose').duration # Work out the final duration of the output render
         if self.dataPackage["musicBool"]: # If the user requested music
-            self.audioLoop = afx.audio_loop(AudioFileClip(self.dataPackage["musicPath"]), duration=self.finalDuration)
+            self.audioLoop = audio_loop(AudioFileClip(self.dataPackage["musicPath"]), duration=self.finalDuration)
             # Create an audio loop for the duration of the final video
             self.concatenatedVideo = concatenate_videoclips(self.clipList, method='compose').set_audio(self.audioLoop)
             # Stitch together all of the clips and add the music 

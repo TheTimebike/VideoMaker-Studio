@@ -62,13 +62,14 @@ class Window(Frame):
         self.subredditBoxLabel.place(x=350, y=104)
 
         self.musicNameBox = Entry(self.master, width=50)
+        self.musicNameBox.insert(0, "./Audio/Audio.mp3") # Sets default value
         self.musicNameBox.place(x=50, y=170) # Given a gap of 30 extra on the y to form a new block
         self.musicNameBoxLabel = Label(self.master, text="Path To Music ( Optional )") # Check to see that the box is filled/unfilled, would
         # then enable and disable music depending on the value
         self.musicNameBoxLabel.place(x=350, y=169) # Nice.
 
         self.renderNameBox = Entry(self.master, width=50)
-        self.renderNameBox.insert(0, "Rendered.mp4") # Sets default value to "Rendered.mp4"
+        self.renderNameBox.insert(0, "./Renders/Rendered.mp4") # Sets default value
         self.renderNameBox.place(x=50, y=205)
         self.renderNameBoxLabel = Label(self.master, text="Name of Outputted Render.")
         self.renderNameBoxLabel.place(x=350, y=204)
@@ -176,6 +177,7 @@ class Window(Frame):
 
         self.menuDropdownStudio.add_command(label="Start", command=self.packageData)
         self.menuDropdownStudio.add_command(label="Clear Boxes", command=self.clearSelections)
+        self.menuDropdownStudio.add_command(label="Remove Old Clips", command=self.deleteOldClips)
         self.menuDropdownStudio.add_command(label="Quit", command=self.quitProgram)
 
         self.darkThemeBool = BooleanVar()
@@ -205,7 +207,7 @@ class Window(Frame):
     def redirectToRedditTokens(self):
         webbrowser.open("https://www.reddit.com/prefs/apps/", 2, True)
     def quitProgram(self):
-        quit()
+        sys.exit()
 
     def turnOnDarkMode(self, textColour="White", backgroundColour="#5c5b5b"):
         if self.darkThemeBool.get() == False:
@@ -234,7 +236,6 @@ class Window(Frame):
         self.logBox.insert(END, logText)
 
     def packageData(self):
-
         # This function directly spins off from the button press, so whenever the button is pressed it will collect all of the information
         # provided by the user and will backage it into a dictionary, not nessesary seeing as this is class based and any function/thread
         # can access all of the information, but if I wanted to enable debugging, using JSON would be a quick and easy way to dump all of 
@@ -366,6 +367,9 @@ class Window(Frame):
 
         # Check for the exitance of ./Downloaded Videos/, create if not found
 
+        if self.deleteOldFilesBool:
+            self.deleteOldClips()
+
         self.insertLog("Downloading Clips")
         self.clipCounter, self.clipNumberConversionTable = 1, {} # Initializing variables
         for videoUrl, videoCreator in self.videoUrlDict.items():
@@ -420,9 +424,15 @@ class Window(Frame):
 
         self.insertLog("Video Rendered")
 
+    def deleteOldClips(self):
+        self.clipList = glob.glob("./Downloaded Videos/Clip*.mp4")
+        for clip in self.clipList:
+            os.remove(clip)
+
+
 root = Tk()
 root.geometry("1100x530")
 apps = Window(root)
 #root.iconbitmap(filepath/to/icon)
 # For adding icon when its finished
-root.mainloop() 
+root.mainloop()

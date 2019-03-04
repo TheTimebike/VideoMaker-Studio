@@ -79,7 +79,7 @@ class Window(Frame):
         self.renderFPSBox.place(x=50, y=330) # Y variable appears to break off from the incrementing, but is actually placed under
         # two checkboxes that are initialized in another function
         # lowest checkbox's y is 265, so if we add in the 35 increment then another 30 for a new block.
-        self.renderFPSBoxLabel = Label(self.master, text="FPS of Output Render")
+        self.renderFPSBoxLabel = Label(self.master, text="Frames Per Second")
         self.renderFPSBoxLabel.place(x=75, y=329)
 
         self.requiredSubredditFlair = Entry(self.master, width=25) # Most flairs are not long, so width halved to save space
@@ -100,7 +100,7 @@ class Window(Frame):
         # which converts them to pythons'.
         self.deleteOldFilesCheckbox = Checkbutton(self.master, variable=self.deleteOldFilesBool)
         self.deleteOldFilesCheckbox.place(x=50, y=240)
-        self.deleteOldFilesLabel = Label(self.master, text="Delete Old Files? ( Downloaded Files and Previous Render )")
+        self.deleteOldFilesLabel = Label(self.master, text="Delete Old Clips?")
         self.deleteOldFilesLabel.place(x=75, y=242) # Text placed 2 lower due to the smaller size of the checkbuttons
 
         self.giveSubmitterCreditBool = BooleanVar()
@@ -110,7 +110,7 @@ class Window(Frame):
         self.giveSubmitterCreditCheckbox = Checkbutton(self.master, variable=self.giveSubmitterCreditBool)
         # if you give the checkbutton a booleanvar variable it adopts its state
         self.giveSubmitterCreditCheckbox.place(x=50, y=265)
-        self.giveSubmitterCreditLabel = Label(self.master, text="Give Clip Submitters Credit?")
+        self.giveSubmitterCreditLabel = Label(self.master, text="Include Clip Uploaders Username?")
         self.giveSubmitterCreditLabel.place(x=75, y=267)
 
     def initOptionmenu(self):
@@ -162,10 +162,10 @@ class Window(Frame):
         self.startButton.place(x=750, y=400)
 
     def initSpinbox(self):
-        self.threadingSpinbox = Spinbox(self.master, values=(1,2,3,4,5,6,7,8,9), width=1)
+        self.threadingSpinbox = Spinbox(self.master, values=(1,2,3,4,5,6,7,8,9), width=2)
         self.threadingSpinbox.place(x=240, y=330) # Aligned vertically with the fps box and is aligned hoziontally with the 
-        self.threadingSpinboxLabel = Label(self.master, text="Number of Threads")
-        self.threadingSpinboxLabel.place(x=260, y=330)
+        self.threadingSpinboxLabel = Label(self.master, text="Thread Count")
+        self.threadingSpinboxLabel.place(x=270, y=330)
 
     def initMenubar(self):
         self.menuBar = Menu(self.master)

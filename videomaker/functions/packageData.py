@@ -1,5 +1,7 @@
 from tkinter import *
 import threading
+from videomaker.functions.insertLog import insertLog
+from videomaker.functions.verifyData import verifyData
 
 def packageData(focus):
     # This function directly spins off from the button press, so whenever the button is pressed it will collect all of the information
@@ -16,17 +18,17 @@ def packageData(focus):
     # Validation checks on each box, get ready to read a bunch of the same stuff
 
     if focus.clientIDBox.get() == "":
-        focus.insertLog("Please Enter a Client ID Token")
+        insertLog(focus, "Please Enter a Client ID Token")
         return
     focus.dataPackage["redditClientID"] = focus.clientIDBox.get()
 
     if focus.clientSecretBox.get() == "":
-        focus.insertLog("Please Enter a Client Secret Token")
+        insertLog(focus, "Please Enter a Client Secret Token")
         return
     focus.dataPackage["redditClientSecret"] = focus.clientSecretBox.get()
 
     if focus.subredditBox.get() == "":
-        focus.insertLog("Please Enter a Subreddit Name")
+        insertLog(focus, "Please Enter a Subreddit Name")
         return
     focus.dataPackage["subredditName"] = focus.subredditBox.get()
 
@@ -42,7 +44,7 @@ def packageData(focus):
         # and reading
 
     if focus.renderNameBox.get() == "":
-        focus.insertLog("Please Enter a Name for the Outputted File")
+        insertLog(focus, "Please Enter a Name for the Outputted File")
         return
     focus.dataPackage["outputRenderName"] = focus.renderNameBox.get() # If they didnt type anything, default to rendered.mp4 or time/date?
 
@@ -50,7 +52,7 @@ def packageData(focus):
     focus.dataPackage["giveCredit"] = focus.giveSubmitterCreditBool.get()
 
     if focus.renderFPSBox.get() == "":
-        focus.insertLog("Please Enter a Valid FPS")
+        insertLog(focus, "Please Enter a Valid FPS")
         return
     focus.dataPackage["framesPerSecond"] = int(focus.renderFPSBox.get())
 
@@ -64,7 +66,7 @@ def packageData(focus):
     focus.dataPackage["timeframe"] = focus.subredditSearchMethodString.get()
 
     if focus.clipDownloadCountBox.get() == "":
-        focus.insertLog("Please Enter a ")
+        insertLog(focus, "Please Enter a ")
         return
     focus.dataPackage["downloadCount"] = int(focus.clipDownloadCountBox.get())
 
@@ -73,6 +75,6 @@ def packageData(focus):
     print(str(focus.dataPackage)) # for debugging
 
     # Start thread for the rest of the verifying and rendering so the main window doesnt freeze
-    focus.thread = threading.Thread(target=focus.verifyData)
+    focus.thread = threading.Thread(target=verifyData)
     focus.thread.daemon = True # So the render stops if the user closes the program
     focus.thread.start()

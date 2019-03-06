@@ -1,6 +1,9 @@
 from tkinter import *
-from videomaker.functions.packageData import packageData
 from videomaker.interface.menu.functions.modules import *
+from videomaker.functions.packageData import packageData
+from videomaker.functions.clearSelection import clearSelections
+from videomaker.functions.deleteOldClips import deleteOldClips
+from videomaker.functions.darkMode import turnOnDarkMode
 
 def initMenubar(focus):
     focus.menuBar = Menu(focus.master)
@@ -11,13 +14,13 @@ def initMenubar(focus):
     focus.menuDropdownHelp = Menu(focus.menuBar)
 
     focus.menuDropdownStudio.add_command(label="Start", command= lambda: packageData(focus))
-    focus.menuDropdownStudio.add_command(label="Clear Boxes", command=focus.clearSelections)
-    focus.menuDropdownStudio.add_command(label="Remove Old Clips", command=focus.deleteOldClips)
+    focus.menuDropdownStudio.add_command(label="Clear Boxes", command=lambda: clearSelections(focus))
+    focus.menuDropdownStudio.add_command(label="Remove Old Clips", command=deleteOldClips)
     focus.menuDropdownStudio.add_command(label="Quit", command=quitProgram)
 
     focus.darkThemeBool = BooleanVar()
     focus.darkThemeBool.set("false")
-    focus.menuDropdownView.add_checkbutton(label="Toggle Dark Mode", onvalue=True, offvalue=False, command=focus.turnOnDarkMode, variable=focus.darkThemeBool)
+    focus.menuDropdownView.add_checkbutton(label="Toggle Dark Mode", onvalue=True, offvalue=False, command= lambda: turnOnDarkMode(focus), variable=focus.darkThemeBool)
 
     focus.loggingModeBool = BooleanVar()
     focus.loggingModeBool.set("false")

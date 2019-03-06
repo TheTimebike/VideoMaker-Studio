@@ -10,7 +10,7 @@ from moviepy.audio.fx.audio_loop import audio_loop
 from videomaker.functions.insertLog import insertLog
 
 
-def render(focus)
+def render(focus):
     insertLog(focus, "Loading Clips into Memory")
 
     focus.clipList = [] # Creates a holder for the clips that can be stitched together with moviepy

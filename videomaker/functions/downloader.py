@@ -2,8 +2,9 @@ from tkinter import *
 import urllib.request
 from videomaker.functions.deleteOldClips import deleteOldClips
 from videomaker.functions.insertLog import insertLog
+from videomaker.functions.render import render
 
-def download(focus)
+def download(focus):
     focus.videoUrlDict = {} # Dictionary to store pairs of clips and authors.
     # post URL is the key and author name is the value
     for subredditPost in focus.subreddit:
@@ -38,3 +39,4 @@ def download(focus)
         focus.clipCounter += 1
 
     insertLog(focus, "Downloaded Clips")
+    render(focus)

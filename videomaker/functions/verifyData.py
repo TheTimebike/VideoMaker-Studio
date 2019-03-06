@@ -1,5 +1,6 @@
 from tkinter import *
 from videomaker.functions.insertLog import insertLog
+from videomaker.functions.downloader import download
 import praw
 
 def verifyData(focus):
@@ -26,3 +27,5 @@ def verifyData(focus):
         return
 
     insertLog(focus, "r/{0} Found".format(focus.dataPackage["subredditName"]))
+    download(focus)
+

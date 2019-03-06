@@ -75,6 +75,6 @@ def packageData(focus):
     print(str(focus.dataPackage)) # for debugging
 
     # Start thread for the rest of the verifying and rendering so the main window doesnt freeze
-    focus.thread = threading.Thread(target=verifyData)
+    focus.thread = threading.Thread(target=verifyData, args=(focus,))
     focus.thread.daemon = True # So the render stops if the user closes the program
     focus.thread.start()

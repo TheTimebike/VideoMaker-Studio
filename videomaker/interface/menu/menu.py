@@ -1,9 +1,9 @@
 from tkinter import *
-from videomaker.interface.menu.functions.modules import *
 from videomaker.functions.packageData import packageData
 from videomaker.functions.clearSelection import clearSelections
 from videomaker.functions.deleteOldClips import deleteOldClips
 from videomaker.functions.darkMode import turnOnDarkMode
+from videomaker.functions.redirect import *
 
 def initMenubar(focus):
     focus.menuBar = Menu(focus.master)

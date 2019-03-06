@@ -1,5 +1,6 @@
 from tkinter import *
 from videomaker.interface.initializer import initWindow
+from videomaker.functions.createFiles import createFiles
 
 # Ive tried to comment and make this as maintainable as possible because maybe someday someone is gonna find this and have no
 # clue whats going on. That person will probably be me.
@@ -20,11 +21,12 @@ class Window(Frame):
         Frame.__init__(self, master)
         self.master = master
         self.master.title("VideoMaker Studio")
+        createFiles()
         initWindow(self)
         
 root = Tk()
 root.geometry("1100x530")
 apps = Window(root)
-#root.iconbitmap(filepath/to/icon)
+root.iconbitmap("vms.ico")
 # For adding icon when its finished
 root.mainloop()

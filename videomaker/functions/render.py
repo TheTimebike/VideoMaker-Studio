@@ -8,10 +8,12 @@ from moviepy.video.compositing.concatenate import concatenate_videoclips
 from moviepy.audio.fx.audio_loop import audio_loop
 
 from videomaker.functions.insertLog import insertLog
+import os
 
 
 def render(focus):
     insertLog(focus, "Loading Clips into Memory")
+    print(os.getcwd())
 
     focus.clipList = [] # Creates a holder for the clips that can be stitched together with moviepy
     for videoNumber in range(1, focus.dataPackage["downloadCount"] + 1): # Using a range() iter rather than a dict/list as I need the index
@@ -35,7 +37,7 @@ def render(focus):
 
     focus.finalDuration = concatenate_videoclips(focus.clipList, method='compose').duration # Work out the final duration of the output render
     if focus.dataPackage["musicBool"]: # If the user requested music
-        focus.audioLoop = audio_loop(AudioFileClip(focus.dataPackage["musicPath"]), duration=focus.finalDuration)
+        focus.audioLoop = audio_loop(AudioFileClip("./Audio/"+focus.dataPackage["musicPath"]), duration=focus.finalDuration)
         # Create an audio loop for the duration of the final video
         focus.concatenatedVideo = concatenate_videoclips(focus.clipList, method='compose').set_audio(focus.audioLoop)
         # Stitch together all of the clips and add the music 
@@ -45,7 +47,7 @@ def render(focus):
 
     insertLog(focus, "Starting Render Process\n This could take a while...") # Let the user know somethings actually happening
     insertLog(focus, "Using {0} threads".format(focus.dataPackage["threadCount"]))
-    focus.concatenatedVideo.write_videofile(focus.dataPackage["outputRenderName"], fps=focus.dataPackage["framesPerSecond"], logger=None, threads=focus.dataPackage["threadCount"])
+    focus.concatenatedVideo.write_videofile("./Renders/"+focus.dataPackage["outputRenderName"], fps=focus.dataPackage["framesPerSecond"], logger=None, threads=focus.dataPackage["threadCount"])
     # Render the video, name it what the user wanted and set the fps they reqested
 
     insertLog(focus, "Video Rendered")

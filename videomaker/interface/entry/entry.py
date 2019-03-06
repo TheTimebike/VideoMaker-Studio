@@ -19,14 +19,13 @@ def initEntryBoxes(focus):
     focus.subredditBoxLabel.place(x=350, y=104)
 
     focus.musicNameBox = Entry(focus.master, width=50)
-    focus.musicNameBox.insert(0, "./Audio/Audio.mp3") # Sets default value
     focus.musicNameBox.place(x=50, y=170) # Given a gap of 30 extra on the y to form a new block
     focus.musicNameBoxLabel = Label(focus.master, text="Path To Music ( Optional )") # Check to see that the box is filled/unfilled, would
     # then enable and disable music depending on the value
     focus.musicNameBoxLabel.place(x=350, y=169) # Nice.
 
     focus.renderNameBox = Entry(focus.master, width=50)
-    focus.renderNameBox.insert(0, "./Renders/Rendered.mp4") # Sets default value
+    focus.renderNameBox.insert(0, "Rendered.mp4") # Sets default value
     focus.renderNameBox.place(x=50, y=205)
     focus.renderNameBoxLabel = Label(focus.master, text="Name of Outputted Render.")
     focus.renderNameBoxLabel.place(x=350, y=204)

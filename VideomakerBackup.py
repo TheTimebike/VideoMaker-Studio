@@ -19,13 +19,9 @@ class Window(Frame):
     def __init__(self, master=None):
         Frame.__init__(self, master)
         self.master = master
-        self.initWindow()
-
-    def initWindow(self):
-        # Main function that spirals off onto activating all of the windows objects.
         self.master.title("VideoMaker Studio")
         initWindow(self)
-
+        
 root = Tk()
 root.geometry("1100x530")
 apps = Window(root)

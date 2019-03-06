@@ -29,7 +29,7 @@ def download(focus):
     for videoUrl, videoCreator in focus.videoUrlDict.items():
         focus.parsedUrl = "https://giant.gfycat.com/" + str(videoUrl).split("/")[3] + ".mp4" # Converts regular gfycat links to
         # giant versions, which can be downloaded easier with urllib.request
-        urllib.request.urlretrieve(focus.parsedUrl, './Downloaded Videos/Clip{0}.mp4'.format(focus.clipCounter))
+        urllib.request.urlretrieve(focus.parsedUrl, '.../Downloaded Videos/Clip{0}.mp4'.format(focus.clipCounter))
         # Download clip to ./Downloaded Videos/
         focus.downloadProgressBar["value"] += 100/int(focus.dataPackage["downloadCount"])
         # Figure out the percentage of videos downloaded, then add it to the progressbar value

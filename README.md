@@ -6,7 +6,7 @@ The Interface for VideoMaker Studio was created in tkinter, a python module for 
 
 If you attempt to compile a version of VMS using Pyinstaller, make sure to bundle the praw.ini file in the .spec file.
 
-## Dependancies
+## Dependencies
 
 VideoMaker Studio, much like the original VideoMaker, relies on a program called Imagemagick to render its videos. When installing ImageMagick, ensure that you enable the "legacy files" option, as VideoMaker Studio relies on these files.
 

@@ -1,6 +1,6 @@
 from tkinter import *
 from videomaker.interface.initializer import initWindow
-from videomaker.functions.createFiles import createFiles
+from videomaker.functions.createFiles import createDirectories
 import sys
 
 isFrozen = False
@@ -27,7 +27,7 @@ class Window(Frame):
         self.isFrozen = frozen
         self.master = master
         self.master.title("VideoMaker Studio")
-        createFiles()
+        createDirectories()
         initWindow(self)
        
 if __name__ == "__main__":

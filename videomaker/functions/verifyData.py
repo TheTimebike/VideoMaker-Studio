@@ -1,9 +1,11 @@
 from tkinter import *
 from videomaker.functions.insertLog import insertLog
 from videomaker.functions.downloader import download
+from videomaker.functions.createFiles import createFiles
 import praw
 
 def verifyData(focus):
+    createFiles()
     focus.reddit = praw.Reddit(client_id=focus.dataPackage["redditClientID"], client_secret=focus.dataPackage["redditClientSecret"], user_agent='UserAgent')
     # 404 HTTP response == not found
     # 401 HTTP response == invalid keys

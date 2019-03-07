@@ -6,7 +6,6 @@ from moviepy.video.compositing.CompositeVideoClip import CompositeVideoClip
 from moviepy.video.fx.resize import resize
 from moviepy.video.compositing.concatenate import concatenate_videoclips
 from moviepy.audio.fx.audio_loop import audio_loop
-
 from videomaker.functions.insertLog import insertLog
 import os
 

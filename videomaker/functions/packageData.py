@@ -1,4 +1,3 @@
-from tkinter import *
 from videomaker.functions.insertLog import insertLog
 from videomaker.functions.verifyData import verifyData
 

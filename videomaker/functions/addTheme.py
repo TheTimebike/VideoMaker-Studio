@@ -1,4 +1,3 @@
-from tkinter import *
 from videomaker.functions.changeTheme import changeTheme
 import sys, os, glob, json
 

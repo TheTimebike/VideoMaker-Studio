@@ -1,5 +1,3 @@
-from tkinter import *
-
 def clearSelections(focus, en=None):
     focus.subredditBox.delete(0, 'end')
     focus.requiredSubredditFlair.delete(0, 'end')

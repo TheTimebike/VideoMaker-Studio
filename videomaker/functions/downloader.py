@@ -1,4 +1,3 @@
-from tkinter import *
 import urllib.request, os
 from videomaker.functions.deleteOldClips import deleteOldClips
 from videomaker.functions.insertLog import insertLog

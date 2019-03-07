@@ -2,7 +2,7 @@ from tkinter import *
 from videomaker.functions.startThread import startThread
 from videomaker.functions.clearSelection import clearSelections
 from videomaker.functions.deleteOldClips import deleteOldClips
-from videomaker.functions.darkMode import turnOnDarkMode
+from videomaker.functions.darkMode import toggleOnDarkMode
 from videomaker.functions.redirect import *
 
 def initMenubar(focus):
@@ -20,7 +20,7 @@ def initMenubar(focus):
 
     focus.darkThemeBool = BooleanVar()
     focus.darkThemeBool.set("false")
-    focus.menuDropdownView.add_checkbutton(label="Toggle Dark Mode", onvalue=True, offvalue=False, command= lambda: turnOnDarkMode(focus), variable=focus.darkThemeBool)
+    focus.menuDropdownView.add_checkbutton(label="Toggle Dark Mode", onvalue=True, offvalue=False, command= lambda: toggleDarkMode(focus), variable=focus.darkThemeBool)
 
     focus.loggingModeBool = BooleanVar()
     focus.loggingModeBool.set("false")

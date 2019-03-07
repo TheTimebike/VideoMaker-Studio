@@ -1,5 +1,4 @@
 from tkinter import *
-import threading
 from videomaker.functions.insertLog import insertLog
 from videomaker.functions.verifyData import verifyData
 
@@ -73,8 +72,4 @@ def packageData(focus):
     focus.dataPackage["threadCount"] = int(focus.threadingSpinbox.get())
 
     print(str(focus.dataPackage)) # for debugging
-
-    # Start thread for the rest of the verifying and rendering so the main window doesnt freeze
-    focus.thread = threading.Thread(target=verifyData, args=(focus,))
-    focus.thread.daemon = True # So the render stops if the user closes the program
-    focus.thread.start()
+    verifyData(focus)

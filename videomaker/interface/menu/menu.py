@@ -1,5 +1,5 @@
 from tkinter import *
-from videomaker.functions.packageData import packageData
+from videomaker.functions.startThread import startThread
 from videomaker.functions.clearSelection import clearSelections
 from videomaker.functions.deleteOldClips import deleteOldClips
 from videomaker.functions.darkMode import turnOnDarkMode
@@ -13,7 +13,7 @@ def initMenubar(focus):
     focus.menuDropdownDebug = Menu(focus.menuBar)
     focus.menuDropdownHelp = Menu(focus.menuBar)
 
-    focus.menuDropdownStudio.add_command(label="Start", command= lambda: packageData(focus))
+    focus.menuDropdownStudio.add_command(label="Start", command= lambda: startThread(focus))
     focus.menuDropdownStudio.add_command(label="Clear Boxes", command=lambda: clearSelections(focus))
     focus.menuDropdownStudio.add_command(label="Remove Old Clips", command=deleteOldClips)
     focus.menuDropdownStudio.add_command(label="Quit", command=quitProgram)

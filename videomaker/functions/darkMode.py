@@ -1,6 +1,6 @@
 from tkinter import *
 
-def turnOnDarkMode(focus):
+def toggleDarkMode(focus):
     focus.textColour = "white"
     focus.backgroundColour="#36393f"
     focus.boxColour="#484b52"

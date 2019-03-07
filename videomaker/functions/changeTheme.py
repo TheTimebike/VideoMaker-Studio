@@ -1,5 +1,3 @@
-from tkinter import *
-
 def changeTheme(focus, theme):
     focus.textColour = theme["textColour"]
     focus.backgroundColour=theme["backgroundColour"]

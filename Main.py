@@ -1,6 +1,11 @@
 from tkinter import *
 from videomaker.interface.initializer import initWindow
 from videomaker.functions.createFiles import createFiles
+import sys
+
+isFrozen = False
+if getattr(sys, 'frozen', True):
+    isFrozen = True
 
 # Ive tried to comment and make this as maintainable as possible because maybe someday someone is gonna find this and have no
 # clue whats going on. That person will probably be me.
@@ -17,16 +22,17 @@ from videomaker.functions.createFiles import createFiles
     # Width of number entry boxes are 15
 
 class Window(Frame):
-    def __init__(self, master=None):
+    def __init__(self, master=None, frozen=False):
         Frame.__init__(self, master)
+        self.isFrozen = frozen
         self.master = master
         self.master.title("VideoMaker Studio")
         createFiles()
         initWindow(self)
-        
-root = Tk()
-root.geometry("1100x530")
-apps = Window(root)
-root.iconbitmap("vms.ico")
-# For adding icon when its finished
-root.mainloop()
+       
+if __name__ == "__main__":
+    root = Tk()
+    root.geometry("1100x530")
+    apps = Window(root, isFrozen)
+    root.iconbitmap("./vms.ico")
+    root.mainloop()

@@ -1,1 +1,6 @@
-
+{
+    "themeName": "Dark",
+    "textColour": "white",
+    "backgroundColour": "#36393f",
+    "boxColour": "#484b52"
+}

@@ -1,1 +1,6 @@
-
+{
+    "themeName": "Light",
+    "textColour": "black",
+    "backgroundColour": "#f0f0f0",
+    "boxColour": "white"
+}

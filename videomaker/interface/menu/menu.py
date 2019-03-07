@@ -2,7 +2,7 @@ from tkinter import *
 from videomaker.functions.startThread import startThread
 from videomaker.functions.clearSelection import clearSelections
 from videomaker.functions.deleteOldClips import deleteOldClips
-from videomaker.functions.darkMode import toggleOnDarkMode
+from videomaker.functions.addTheme import addNewTheme
 from videomaker.functions.redirect import *
 
 def initMenubar(focus):
@@ -18,9 +18,7 @@ def initMenubar(focus):
     focus.menuDropdownStudio.add_command(label="Remove Old Clips", command=deleteOldClips)
     focus.menuDropdownStudio.add_command(label="Quit", command=quitProgram)
 
-    focus.darkThemeBool = BooleanVar()
-    focus.darkThemeBool.set("false")
-    focus.menuDropdownView.add_checkbutton(label="Toggle Dark Mode", onvalue=True, offvalue=False, command= lambda: toggleDarkMode(focus), variable=focus.darkThemeBool)
+    addNewTheme(focus)
 
     focus.loggingModeBool = BooleanVar()
     focus.loggingModeBool.set("false")

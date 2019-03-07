@@ -2,7 +2,7 @@ from tkinter import *
 
 def changeTheme(focus, theme):
     focus.textColour = theme["textColour"]
-    focus.backgroundColour=theme["backgroundColoir"]
+    focus.backgroundColour=theme["backgroundColour"]
     focus.boxColour=theme["boxColour"]
 
     focus.logBox.configure(background=focus.boxColour)

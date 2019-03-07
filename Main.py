@@ -34,5 +34,5 @@ if __name__ == "__main__":
     root = Tk()
     root.geometry("1100x530")
     apps = Window(root, isFrozen)
-    root.iconbitmap("./vms.ico")
+    #root.iconbitmap("./vms.ico")
     root.mainloop()

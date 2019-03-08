@@ -1,6 +1,7 @@
 from tkinter import *
 from videomaker.interface.initializer import initWindow
 from videomaker.functions.createFiles import createDirectories
+from videomaker.functions.verifyData import verifyData
 import sys, os
 
 isFrozen = False
@@ -36,3 +37,8 @@ if __name__ == "__main__":
     apps = Window(root, isFrozen)
     root.iconbitmap(os.getcwd() + "vms.ico")
     root.mainloop()
+else: # If the module was being loaded as a function
+    def createVideo(packageData):
+        setattr(self, "packageData", packageData
+        verifyData(self)
+        

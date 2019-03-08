@@ -9,7 +9,8 @@ def initOptionmenu(focus):
     "the last month", # Might include support for hot, new and rising categories
     "the last week", # Would require a second option menu
     "the last day", 
-    "the last hour") 
+    "the last hour")
+    focus.subredditSearchMethod.configure(highlightthickness=0)
 
     focus.subredditSearchMethod.place(x=240, y=390)
     # Optionmenu deviates from the x=50 rule, this is because its positioned after this text \/

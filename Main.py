@@ -23,13 +23,14 @@ if getattr(sys, 'frozen', True):
     # Width of number entry boxes are 15
 
 class Window(Frame):
-    def __init__(self, master=None, frozen=False):
+    def __init__(self, master=None, frozen=False, windowed=True):
         Frame.__init__(self, master)
         self.isFrozen = frozen
         self.master = master
         self.master.title("VideoMaker Studio")
         createDirectories()
-        initWindow(self)
+        if windowed:
+            initWindow(self)
        
 if __name__ == "__main__":
     root = Tk()
@@ -38,7 +39,10 @@ if __name__ == "__main__":
     root.iconbitmap(os.getcwd() + "vms.ico")
     root.mainloop()
 else: # If the module was being loaded as a function
-    def createVideo(packageData):
+    def createVideo(packageData): # Define a function that support commandline rendering and things.
+        root = Tk()
+        apps = Window(root, isFrozen, False)
+        root.mainloop()
         setattr(self, "packageData", packageData
         verifyData(self)
         

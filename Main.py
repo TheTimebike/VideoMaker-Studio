@@ -1,7 +1,7 @@
 from tkinter import *
 from videomaker.interface.initializer import initWindow
 from videomaker.functions.createFiles import createDirectories
-import sys
+import sys, os
 
 isFrozen = False
 if getattr(sys, 'frozen', True):
@@ -34,5 +34,5 @@ if __name__ == "__main__":
     root = Tk()
     root.geometry("1100x530")
     apps = Window(root, isFrozen)
-    #root.iconbitmap("./vms.ico")
+    root.iconbitmap(os.getcwd() + "vms.ico")
     root.mainloop()

@@ -15,7 +15,9 @@ def addOption(focus, theme):
 def addNewTheme(focus):
     fileList = glob.glob(os.getcwd() + "/interface/colourscheme/*.json") # Iterates through json files in the directory
     for themeFile in fileList:
-        with open(themeFile, "r") as out:
-            theme = json.load(out) # Saves the data in the file to a variable
-        addOption(focus, theme) # Adds the option to the view tab
- 
+        try:
+            with open(themeFile, "r") as out:
+                theme = json.load(out) # Saves the data in the file to a variable
+            addOption(focus, theme) # Adds the option to the view tab
+        except Exception as ex:
+            pass

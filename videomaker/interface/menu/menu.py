@@ -4,6 +4,7 @@ from videomaker.functions.clearSelection import clearSelections
 from videomaker.functions.deleteOldClips import deleteOldClips
 from videomaker.functions.addTheme import addNewTheme
 from videomaker.functions.redirect import *
+from videomaker.interface.newthemewindow.newThemeWindow import initWindow
 
 def initMenubar(focus):
     focus.menuBar = Menu(focus.master)
@@ -17,6 +18,8 @@ def initMenubar(focus):
     focus.menuDropdownStudio.add_command(label="Clear Boxes", command=lambda: clearSelections(focus))
     focus.menuDropdownStudio.add_command(label="Remove Old Clips", command=deleteOldClips)
     focus.menuDropdownStudio.add_command(label="Quit", command=quitProgram)
+
+    focus.menuDropdownView.add_command(label="Design A New Theme", command=initWindow)
 
     addNewTheme(focus)
 

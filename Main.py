@@ -36,13 +36,13 @@ if __name__ == "__main__":
     root = Tk()
     root.geometry("1100x530")
     apps = Window(root, isFrozen)
-    root.iconbitmap(os.getcwd() + "vms.ico")
+    #root.iconbitmap("./vms.ico")
     root.mainloop()
 else: # If the module was being loaded as a function
     def createVideo(packageData): # Define a function that support commandline rendering and things.
         root = Tk()
         apps = Window(root, isFrozen, False)
         root.mainloop()
-        setattr(self, "packageData", packageData
+        setattr(self, "packageData", packageData)
         verifyData(self)
         

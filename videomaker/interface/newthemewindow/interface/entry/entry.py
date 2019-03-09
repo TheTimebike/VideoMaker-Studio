@@ -13,5 +13,10 @@ def initEntry(focus):
 
     focus.selectThemeTextColourBox = Entry(focus.master, width=25)
     focus.selectThemeTextColourBox.place(x=50, y=135)
-    focus.selectThemeTextColourBoxLabel = Label(focus.master, text="Select A Theme Box Colour")
-    focus.selectThemeTextColourBoxLabel.place(x=50, y=115)
+    focus.selectThemeTextColourBoxLabel = Label(focus.master, text="Select A Theme Text Colour")
+    focus.selectThemeTextColourBoxLabel.place(x=50, y=110)
+
+    focus.selectThemeBoxColourBox = Entry(focus.master, width=25)
+    focus.selectThemeBoxColourBox.place(x=50, y=185)
+    focus.selectThemeBoxColourBoxLabel = Label(focus.master, text="Select a Theme Box Colour")
+    focus.selectThemeBoxColourBoxLabel.place(x=50, y=160)

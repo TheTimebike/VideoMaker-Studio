@@ -13,6 +13,7 @@ def initMenubar(focus):
     focus.menuDropdownView = Menu(focus.menuBar)
     focus.menuDropdownDebug = Menu(focus.menuBar)
     focus.menuDropdownHelp = Menu(focus.menuBar)
+    focus.menuDropdownStartFromFile = Menu(focus.menuBar)
 
     focus.menuDropdownStudio.add_command(label="Start", command= lambda: startThread(focus))
     focus.menuDropdownStudio.add_command(label="Clear Boxes", command=lambda: clearSelections(focus))
@@ -32,6 +33,9 @@ def initMenubar(focus):
     focus.menuDropdownHelp.add_command(label="Contact The Creator", command=redirectToRedditMessage)
     focus.menuDropdownHelp.add_command(label="How To Find Reddit Tokens?", command=redirectToRedditTokens)
 
+    focus.menuDropdownStartFromFile.add_command(label="Save Current Settings")#, command= lambda: savePreset(focus))
+    # addPresets(focus)
+    
     focus.menuBar.add_cascade(label="VideoMaker Studio", menu=focus.menuDropdownStudio)
     focus.menuBar.add_cascade(label="View", menu=focus.menuDropdownView)
     focus.menuBar.add_cascade(label="Debug", menu=focus.menuDropdownDebug)

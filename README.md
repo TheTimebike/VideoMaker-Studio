@@ -20,8 +20,15 @@ VideoMaker Studio, much like the original VideoMaker, relies on a program called
 
 VideoMaker Studio comes with both light and dark mode themes, with the current theme able to be switched under the "View" menu.
 
-### Light Mode
+### Light Theme
 ![Light Mode](https://raw.githubusercontent.com/TheTimebike/VideoMaker-Studio/master/images/lightmode.PNG)
 
-### Dark Mode
+### Dark Theme
 ![Dark Mode](https://raw.githubusercontent.com/TheTimebike/VideoMaker-Studio/master/images/darkmode.PNG)
+
+### Make Your Own Theme
+Use the "New Theme" option under the "View" tab to create your own custom theme.
+![Custom Theme](placeholder)
+
+## Command Line Alternative
+Alternatively, you can load VideoMaker Studio as a module and it will automatically switch into a headless version of itself that can render the videos you tell it. All you have to do is import Main.py, and call the createVideo() function.

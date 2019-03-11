@@ -1,8 +1,11 @@
 from videomaker.functions.verifyData import verifyData
-import glob, os
+import glob, os, threading
 
 def addOption(focus, preset, name):
-    focus.menuDropdownStartFromFile.add_command(label="Start {0} Preset".format(name), command= lambda: verifyData(focus, preset=preset))
+    focus.menuDropdownStartFromFile.add_command(label="Start {0} Preset".format(name), command= lambda: startThread(focus, preset))
+    
+def startThread(focus, preset):
+    threading.Thread(target=verifyData, args=(focus,preset)).start()
  
 def addPreset(focus):
     fileList = glob.glob(os.getcwd() + "/presets/*.json") # Iterates through json files in the directory

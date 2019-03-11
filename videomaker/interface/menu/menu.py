@@ -35,7 +35,7 @@ def initMenubar(focus):
     focus.menuDropdownHelp.add_command(label="How To Find Reddit Tokens?", command=redirectToRedditTokens)
 
     focus.menuDropdownStartFromFile.add_command(label="Save Current Settings")#, command= lambda: savePreset(focus))
-    # addPreset(focus)
+    addPreset(focus)
     
     focus.menuBar.add_cascade(label="VideoMaker Studio", menu=focus.menuDropdownStudio)
     focus.menuBar.add_cascade(label="View", menu=focus.menuDropdownView)

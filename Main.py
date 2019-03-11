@@ -43,6 +43,6 @@ else: # If the module was being loaded as a function
         root = Tk()
         apps = Window(root, isFrozen, False)
         root.mainloop()
-        setattr(self, "packageData", packageData)
+        self.packageData = packageData
         verifyData(self)
         

@@ -1,5 +1,5 @@
 from tkinter import *
-from videomaker.interface.newthemewindow.interface.initializer import initWindow as oInitWindow
+from videomaker.interface.newthemewindow.interface.initializer import initWindow as initWindowModules
 from videomaker.interface.newthemewindow.interface.functions.changeTheme import changeTheme
 
 class Window(Frame):
@@ -10,7 +10,7 @@ class Window(Frame):
         self.chosenBackgroundColour = ""
         self.chosenBoxColour = ""
         self.chosenTextColour = ""
-        oInitWindow(self)
+        initWindowModules(self)
         changeTheme(self)
         
 

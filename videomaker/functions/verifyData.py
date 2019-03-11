@@ -3,8 +3,10 @@ from videomaker.functions.downloader import download
 from videomaker.functions.createFiles import createFiles
 import praw
 
-def verifyData(focus):
+def verifyData(focus, preset=None):
     createFiles()
+    if preset != None:
+        self.dataPackage = preset
     focus.reddit = praw.Reddit(client_id=focus.dataPackage["redditClientID"], client_secret=focus.dataPackage["redditClientSecret"], user_agent='UserAgent')
     # 404 HTTP response == not found
     # 401 HTTP response == invalid keys

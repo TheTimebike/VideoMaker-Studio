@@ -8,10 +8,10 @@ def initButton(focus):
     focus.selectThemeBackgroundColourButton = Button(focus.master, text="Select", width=10, height=1, command=lambda: askBackgroundColour(focus))
     focus.selectThemeBackgroundColourButton.place(x=225, y=83)
 
-    focus.selectThemeBoxColourButton = Button(focus.master, text="Select", width=10, height=1, command=lambda: askBoxColour(focus)
+    focus.selectThemeBoxColourButton = Button(focus.master, text="Select", width=10, height=1, command=lambda: askBoxColour(focus))
     focus.selectThemeBoxColourButton.place(x=225, y=133)
 
-    focus.selectThemeTextColourButton = Button(focus.master, text="Select", width=10, height=1, command=lambda: askTextColour(focus)
+    focus.selectThemeTextColourButton = Button(focus.master, text="Select", width=10, height=1, command=lambda: askTextColour(focus))
     focus.selectThemeTextColourButton.place(x=225, y=183)
                                                
     focus.createThemeButton = Button(focus.master, text="Create", width=100, height=3, command=lambda: createTheme(focus))

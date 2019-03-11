@@ -1,7 +1,7 @@
 from videomaker.functions.insertLog import insertLog
 from videomaker.functions.verifyData import verifyData
 
-def packageData(focus, continue=True):
+def packageData(focus, verify=True):
     # This function directly spins off from the button press, so whenever the button is pressed it will collect all of the information
     # provided by the user and will backage it into a dictionary, not nessesary seeing as this is class based and any function/thread
     # can access all of the information, but if I wanted to enable debugging, using JSON would be a quick and easy way to dump all of 
@@ -71,7 +71,7 @@ def packageData(focus, continue=True):
     focus.dataPackage["threadCount"] = int(focus.threadingSpinbox.get())
 
     print(str(focus.dataPackage)) # for debugging
-    if not continue:
+    if not verify:
         verifyData(focus)
     else:
         return focus.dataPackage

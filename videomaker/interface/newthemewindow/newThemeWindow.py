@@ -1,6 +1,6 @@
 from tkinter import *
 from videomaker.interface.newthemewindow.interface.initializer import initWindow as initWindowModules
-from videomaker.interface.newthemewindow.interface.functions.changeTheme import changeTheme
+from videomaker.interface.newthemewindow.functions.changeTheme import changeTheme
 
 class Window(Frame):
     def __init__(self, master=None, main=None):

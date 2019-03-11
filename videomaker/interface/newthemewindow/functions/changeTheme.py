@@ -11,6 +11,6 @@ def changeTheme(focus):
     focus.selectThemeBoxColourBox.configure(background=focus.boxColour)
     
     focus.selectThemeNameBoxLabel.configure(background=focus.backgroundColour, foreground=focus.textColour)
-    focus.selectThemeBackgroundColourBoxLabel.configure(background=focus.backgroundColour, foreground=focus.textColour))
+    focus.selectThemeBackgroundColourBoxLabel.configure(background=focus.backgroundColour, foreground=focus.textColour)
     focus.selectThemeTextColourBoxLabel.configure(background=focus.backgroundColour, foreground=focus.textColour)
     focus.selectThemeBoxColourBoxLabel.configure(background=focus.backgroundColour, foreground=focus.textColour)

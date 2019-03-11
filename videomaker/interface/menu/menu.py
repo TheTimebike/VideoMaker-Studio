@@ -22,7 +22,7 @@ def initMenubar(focus):
     focus.menuDropdownStudio.add_command(label="Remove Old Clips", command=deleteOldClips)
     focus.menuDropdownStudio.add_command(label="Quit", command=quitProgram)
 
-    focus.menuDropdownView.add_command(label="Design A New Theme", command=initWindow)
+    focus.menuDropdownView.add_command(label="Design A New Theme", command=lambda: initWindow(focus))
 
     addNewTheme(focus)
 
@@ -39,6 +39,7 @@ def initMenubar(focus):
     addPreset(focus)
     
     focus.menuBar.add_cascade(label="VideoMaker Studio", menu=focus.menuDropdownStudio)
+    focus.menuBar.add_cascade(label="Presets", menu=focus.menuDropdownStartFromFile)
     focus.menuBar.add_cascade(label="View", menu=focus.menuDropdownView)
     focus.menuBar.add_cascade(label="Debug", menu=focus.menuDropdownDebug)
     focus.menuBar.add_cascade(label="Help", menu=focus.menuDropdownHelp)

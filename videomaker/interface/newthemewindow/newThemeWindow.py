@@ -6,6 +6,9 @@ class Window(Frame):
         Frame.__init__(self, master)
         self.master.title("Create A Theme")
         oInitWindow(self)
+        self.chosenBackgroundColour = ""
+        self.chosenBoxColour = ""
+        self.chosenTextColour = ""
 
 def initWindow():
     root = Tk()

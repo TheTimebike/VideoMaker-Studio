@@ -1,5 +1,6 @@
 from videomaker.functions.insertLog import insertLog
 from videomaker.functions.verifyData import verifyData
+import os
 
 def packageData(focus, verify=True):
     # This function directly spins off from the button press, so whenever the button is pressed it will collect all of the information

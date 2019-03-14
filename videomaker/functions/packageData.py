@@ -72,7 +72,7 @@ def packageData(focus, verify=True):
     focus.dataPackage["threadCount"] = int(focus.threadingSpinbox.get())
 
     print(str(focus.dataPackage)) # for debugging
-    if not verify:
+    if verify:
         verifyData(focus)
     else:
         return focus.dataPackage

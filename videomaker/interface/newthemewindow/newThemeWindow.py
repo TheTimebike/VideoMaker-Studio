@@ -6,7 +6,7 @@ class Window(Frame):
     def __init__(self, master=None, main=None):
         Frame.__init__(self, master)
         self.master.title("Create A Theme")
-        self.mainWindow = main
+        self.main = main
         self.chosenBackgroundColour = ""
         self.chosenBoxColour = ""
         self.chosenTextColour = ""

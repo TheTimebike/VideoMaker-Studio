@@ -14,5 +14,5 @@ def initButton(focus):
     focus.selectThemeTextColourButton = Button(focus.master, text="Select", width=10, height=1, command=lambda: askTextColour(focus))
     focus.selectThemeTextColourButton.place(x=225, y=183)
                                                
-    focus.createThemeButton = Button(focus.master, text="Create", width=100, height=3, command=lambda: createTheme(focus))
+    focus.createThemeButton = Button(focus.master, text="Create", width=50, height=3, command=lambda: createTheme(focus))
     focus.createThemeButton.place(x=50, y=250)

@@ -10,7 +10,7 @@ If you attempt to compile a version of VMS using Pyinstaller, make sure to bundl
 
 ## How To Get Reddit Tokens
 
-You can get your Reddit bot tokens from [Here](https://reddit.com/prefs/apps/). You need to create an application and then use the ID and Secret tokens it gives you to allow VideoMaker Studio access to Reddit. VideoMaker does not store these tokens in any file, and does not keep these tokens in any form.
+You can get your Reddit bot tokens from [Here](https://reddit.com/prefs/apps/). You need to create an application and then use the ID and Secret tokens it gives you to allow VideoMaker Studio access to Reddit. If you decide to save a preset including your Reddit bot tokens, it will store them with the preset file. 
 
 ## Dependencies
 

@@ -36,7 +36,7 @@ if __name__ == "__main__":
     root = Tk()
     root.geometry("1100x530")
     apps = Window(root, isFrozen)
-    #root.iconbitmap("./vms.ico")
+    #root.iconbitmap("./vms.ico") # iconbitmap function requires full path rather than ./, and os.getcwd() doesnt work either
     root.mainloop()
 else: # If the module was being loaded as a function
     def createVideo(packageData): # Define a function that support commandline rendering and things.

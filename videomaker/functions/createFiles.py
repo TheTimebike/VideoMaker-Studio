@@ -3,8 +3,8 @@ import sys, os
 def createDirectories():
     dirList = ["Downloaded Videos", "Audio", "Renders"]
     for pathName in dirList:
-        if not os.path.exists("./"+pathName+"/"):
-            os.mkdir("./"+pathName+"/")
+        if not os.path.exists("../"+pathName+"/"):
+            os.mkdir("../"+pathName+"/")
             
 def createFiles():
     if not os.path.isfile("./praw.ini"):

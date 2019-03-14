@@ -17,7 +17,7 @@ def render(focus):
     focus.clipList = [] # Creates a holder for the clips that can be stitched together with moviepy
     for videoNumber in range(1, focus.dataPackage["downloadCount"] + 1): # Using a range() iter rather than a dict/list as I need the index
         insertLog(focus, "Loading Clip: {0}".format(videoNumber))
-        focus.videoClip = VideoFileClip("./Downloaded Videos/Clip{0}.mp4".format(videoNumber)).fx( resize,(1280, 720)) 
+        focus.videoClip = VideoFileClip("../Downloaded Videos/Clip{0}.mp4".format(videoNumber)).fx( resize,(1280, 720)) 
         # Loads file up as a VideoFileClip object, then resizes the clip to be 1280x720
         if focus.dataPackage["giveCredit"]: # If the user wants to give credit to the clip creators
             focus.clipAuthor = focus.clipNumberConversionTable[str(videoNumber)] # Uses the clip number to find the creator
@@ -36,7 +36,7 @@ def render(focus):
 
     focus.finalDuration = concatenate_videoclips(focus.clipList, method='compose').duration # Work out the final duration of the output render
     if focus.dataPackage["musicBool"]: # If the user requested music
-        focus.audioLoop = audio_loop(AudioFileClip("./Audio/"+focus.dataPackage["musicPath"]), duration=focus.finalDuration)
+        focus.audioLoop = audio_loop(AudioFileClip("../Audio/"+focus.dataPackage["musicPath"]), duration=focus.finalDuration)
         # Create an audio loop for the duration of the final video
         focus.concatenatedVideo = concatenate_videoclips(focus.clipList, method='compose').set_audio(focus.audioLoop)
         # Stitch together all of the clips and add the music 
@@ -46,7 +46,7 @@ def render(focus):
 
     insertLog(focus, "Starting Render Process\n This could take a while...") # Let the user know somethings actually happening
     insertLog(focus, "Using {0} threads".format(focus.dataPackage["threadCount"]))
-    focus.concatenatedVideo.write_videofile("./Renders/"+focus.dataPackage["outputRenderName"], fps=focus.dataPackage["framesPerSecond"], logger=None, threads=focus.dataPackage["threadCount"])
+    focus.concatenatedVideo.write_videofile("../Renders/"+focus.dataPackage["outputRenderName"], fps=focus.dataPackage["framesPerSecond"], logger=None, threads=focus.dataPackage["threadCount"])
     # Render the video, name it what the user wanted and set the fps they reqested
 
     insertLog(focus, "Video Rendered")

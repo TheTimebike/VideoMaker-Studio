@@ -1,7 +1,7 @@
 from videomaker.functions.startFromFile import startFromFile
 import glob, os, threading
 
-def addOption(focus, path, name):
+def addOption(focus, path, name="Undefined"):
     focus.menuDropdownStartFromFile.add_command(label="Start {0} Preset".format(name), command= lambda: startFromFile(focus, path))
  
 def addPreset(focus):
